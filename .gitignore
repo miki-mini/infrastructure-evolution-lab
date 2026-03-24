@@ -1,0 +1,7 @@
+.env
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+# 実験データ（巨大になるなら除外）
+# generations/
