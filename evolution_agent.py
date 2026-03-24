@@ -39,22 +39,41 @@ def evolve_infrastructure(current_code, generation):
 
 # 3. 実験の実行
 if __name__ == "__main__":
-    # 前の世代を読み込む
-    base_file = Path("main.tf")
-    if not base_file.exists():
-        print("エラー: main.tf（第0世代）が見当たりません！")
-        exit()
+    import re
+
+    # 最新の世代のファイルを探す
+    generations_dir = Path("./generations")
+    max_gen = 0
+    
+    if generations_dir.exists():
+        for file_path in generations_dir.glob("gen_*.tf"):
+            match = re.search(r"gen_(\d+)\.tf", file_path.name)
+            if match:
+                gen_num = int(match.group(1))
+                if gen_num > max_gen:
+                    max_gen = gen_num
+
+    if max_gen == 0:
+        base_file = Path("main.tf")
+        if not base_file.exists():
+            print("エラー: main.tf（第0世代）が見当たりません！")
+            exit()
+    else:
+        base_file = generations_dir / f"gen_{max_gen}.tf"
+
+    print(f"📄 ベースとなるファイル: {base_file} (第 {max_gen} 世代)")
 
     with open(base_file, "r", encoding="utf-8") as f:
         current_gen_code = f.read()
 
-    # 進化！
-    new_gen_code = evolve_infrastructure(current_gen_code, 0)
+    # 進化（次の世代へ）！
+    next_gen = max_gen + 1
+    new_gen_code = evolve_infrastructure(current_gen_code, max_gen)
 
-    # 結果を保存（第1世代として保存）
-    next_gen_file = Path(f"./generations/gen_1.tf")
+    # 結果を保存
+    next_gen_file = generations_dir / f"gen_{next_gen}.tf"
     with open(next_gen_file, "w", encoding="utf-8") as f:
         f.write(new_gen_code)
 
-    print(f"✨ 進化完了！ ./generations/gen_1.tf を確認してください。")
-    print(f"💬 コミットメッセージ案: 'Day 1: AI discovered Spot VMs and MIG!'")
+    print(f"✨ 進化完了！ {next_gen_file} を確認してください。")
+    print(f"💬 コミットメッセージ案: 'Generation {next_gen}: Evolved from {base_file.name}'")
