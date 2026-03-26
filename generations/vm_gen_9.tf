@@ -16,12 +16,12 @@
 # -------------------------------------------------------------------
 
 provider "google" {
-  project = "YOUR_GCP_PROJECT_ID"
+  project = var.project_id
   region  = "asia-northeast1"
 }
 
 locals {
-  project_id = "YOUR_GCP_PROJECT_ID"
+  project_id = var.project_id
   region     = "asia-northeast1"
   machine    = "e2-micro"
   image      = "cos-cloud/cos-stable"
@@ -67,7 +67,7 @@ resource "google_compute_instance_template" "sovereign_blueprint" {
   machine_type = local.machine
 
   scheduling {
-    preemptible        = true 
+    preemptible        = true
     automatic_restart  = false
     provisioning_model = "SPOT"
     instance_termination_action = "STOP"
