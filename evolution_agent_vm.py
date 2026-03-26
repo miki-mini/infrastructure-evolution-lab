@@ -13,7 +13,7 @@ Path("./generations").mkdir(exist_ok=True)
 
 def autonomous_evolution(current_code, generation):
     print(f"🎤 第 {generation+1} 世代：AI選抜総選挙を開始します（候補3案）...")
-    
+
     # 審査基準（適応度関数）をプロンプトに詳しく書く
     prompt = f"""
     あなたは「超一流のインフラ審査員」兼「錬金術師」です。
@@ -24,9 +24,11 @@ def autonomous_evolution(current_code, generation):
     {current_code}
 
     【審査員のこだわり（採点基準）】
-    1. コスト：月額0円（Scale to Zero）を維持しているか？（100点）
-    2. 頑丈さ：マルチリージョンや自動復旧が完璧か？（100点）
-    3. 美学：フリーザ様のように無駄がなく、洗練されているか？（100点）
+    1. 泥臭いコスト削減：Spot VMを必ず維持しつつ、VM構成の限界まで無駄を削ぎ落としているか？（100点）
+    ※Cloud Runなどのサーバーレスへ転生する「逃げ」は禁止とする。
+    2. 頑丈さ：多重ゾーンのMIG（自動修復）が設定されており、Googleの気まぐれでVMを消されても秒で蘇るか？（100点）
+    3. 美学：無駄な外部IPを持たず、洗練された「不死身の拠点」になっているか？（100点）
+
 
     【出力形式】
     1. Mikiさんへの報告：新しく進化したポイントを、お仕事やお買い物に例えて3行で。
@@ -51,10 +53,10 @@ if __name__ == "__main__":
     # 最新の世代のファイルを探す
     generations_dir = Path("./generations")
     max_gen = 0
-    
+
     if generations_dir.exists():
-        for file_path in generations_dir.glob("gen_*.tf"):
-            match = re.search(r"gen_(\d+)\.tf", file_path.name)
+        for file_path in generations_dir.glob("vm_gen_*.tf"):
+            match = re.search(r"vm_gen_(\d+)\.tf", file_path.name)
             if match:
                 gen_num = int(match.group(1))
                 if gen_num > max_gen:
@@ -66,7 +68,7 @@ if __name__ == "__main__":
             print("エラー: main.tf（第0世代）が見当たりません！")
             exit()
     else:
-        base_file = generations_dir / f"gen_{max_gen}.tf"
+        base_file = generations_dir / f"vm_gen_{max_gen}.tf"
 
     print(f"📄 ベースとなるファイル: {base_file} (第 {max_gen} 世代)")
 
@@ -78,7 +80,7 @@ if __name__ == "__main__":
     new_gen_code = autonomous_evolution(current_gen_code, max_gen)
 
     # 結果を保存
-    next_gen_file = generations_dir / f"gen_{next_gen}.tf"
+    next_gen_file = generations_dir / f"vm_gen_{next_gen}.tf"
     with open(next_gen_file, "w", encoding="utf-8") as f:
         f.write(new_gen_code)
 
