@@ -1,0 +1,403 @@
+﻿google_service_account.akasha_servant: Refreshing state... [id=projects/infrastructure-alchemist/serviceAccounts/v6-akasha-sa@infrastructure-alchemist.iam.gserviceaccount.com]
+google_secret_manager_secret.akasha_formula: Refreshing state... [id=projects/infrastructure-alchemist/secrets/v6-akashic-records]
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # google_cloud_run_v2_service.akasha_v6["asia-northeast1"] will be created
+  + resource "google_cloud_run_v2_service" "akasha_v6" {
+      + conditions              = (known after apply)
+      + create_time             = (known after apply)
+      + creator                 = (known after apply)
+      + delete_time             = (known after apply)
+      + deletion_protection     = true
+      + effective_annotations   = (known after apply)
+      + effective_labels        = {
+          + "goog-terraform-provisioned" = "true"
+        }
+      + etag                    = (known after apply)
+      + expire_time             = (known after apply)
+      + generation              = (known after apply)
+      + id                      = (known after apply)
+      + ingress                 = "INGRESS_TRAFFIC_ALL"
+      + last_modifier           = (known after apply)
+      + latest_created_revision = (known after apply)
+      + latest_ready_revision   = (known after apply)
+      + launch_stage            = (known after apply)
+      + location                = "asia-northeast1"
+      + name                    = "v6-akasha-service-asia-northeast1"
+      + observed_generation     = (known after apply)
+      + project                 = "infrastructure-alchemist"
+      + reconciling             = (known after apply)
+      + terminal_condition      = (known after apply)
+      + terraform_labels        = {
+          + "goog-terraform-provisioned" = "true"
+        }
+      + traffic_statuses        = (known after apply)
+      + uid                     = (known after apply)
+      + update_time             = (known after apply)
+      + uri                     = (known after apply)
+      + urls                    = (known after apply)
+
+      + scaling (known after apply)
+
+      + template {
+          + max_instance_request_concurrency = (known after apply)
+          + service_account                  = "v6-akasha-sa@infrastructure-alchemist.iam.gserviceaccount.com"
+          + timeout                          = (known after apply)
+
+          + containers {
+              + build_info = (known after apply)
+              + image      = "us-docker.pkg.dev/cloudrun/container/hello:latest"
+
+              + ports (known after apply)
+
+              + resources {
+                  + limits            = {
+                      + "cpu"    = "1"
+                      + "memory" = "128Mi"
+                    }
+                  + startup_cpu_boost = true
+                }
+
+              + startup_probe (known after apply)
+
+              + volume_mounts {
+                  + mount_path = "/secrets"
+                  + name       = "secret-volume"
+                }
+            }
+
+          + scaling {
+              + max_instance_count = 3
+              + min_instance_count = 0
+            }
+
+          + volumes {
+              + name = "secret-volume"
+
+              + secret {
+                  + secret = "v6-akashic-records"
+
+                  + items {
+                      + path    = "formula.txt"
+                      + version = "latest"
+                    }
+                }
+            }
+        }
+
+      + traffic {
+          + percent = 100
+          + type    = "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST"
+        }
+    }
+
+  # google_cloud_run_v2_service.akasha_v6["asia-northeast2"] will be created
+  + resource "google_cloud_run_v2_service" "akasha_v6" {
+      + conditions              = (known after apply)
+      + create_time             = (known after apply)
+      + creator                 = (known after apply)
+      + delete_time             = (known after apply)
+      + deletion_protection     = true
+      + effective_annotations   = (known after apply)
+      + effective_labels        = {
+          + "goog-terraform-provisioned" = "true"
+        }
+      + etag                    = (known after apply)
+      + expire_time             = (known after apply)
+      + generation              = (known after apply)
+      + id                      = (known after apply)
+      + ingress                 = "INGRESS_TRAFFIC_ALL"
+      + last_modifier           = (known after apply)
+      + latest_created_revision = (known after apply)
+      + latest_ready_revision   = (known after apply)
+      + launch_stage            = (known after apply)
+      + location                = "asia-northeast2"
+      + name                    = "v6-akasha-service-asia-northeast2"
+      + observed_generation     = (known after apply)
+      + project                 = "infrastructure-alchemist"
+      + reconciling             = (known after apply)
+      + terminal_condition      = (known after apply)
+      + terraform_labels        = {
+          + "goog-terraform-provisioned" = "true"
+        }
+      + traffic_statuses        = (known after apply)
+      + uid                     = (known after apply)
+      + update_time             = (known after apply)
+      + uri                     = (known after apply)
+      + urls                    = (known after apply)
+
+      + scaling (known after apply)
+
+      + template {
+          + max_instance_request_concurrency = (known after apply)
+          + service_account                  = "v6-akasha-sa@infrastructure-alchemist.iam.gserviceaccount.com"
+          + timeout                          = (known after apply)
+
+          + containers {
+              + build_info = (known after apply)
+              + image      = "us-docker.pkg.dev/cloudrun/container/hello:latest"
+
+              + ports (known after apply)
+
+              + resources {
+                  + limits            = {
+                      + "cpu"    = "1"
+                      + "memory" = "128Mi"
+                    }
+                  + startup_cpu_boost = true
+                }
+
+              + startup_probe (known after apply)
+
+              + volume_mounts {
+                  + mount_path = "/secrets"
+                  + name       = "secret-volume"
+                }
+            }
+
+          + scaling {
+              + max_instance_count = 3
+              + min_instance_count = 0
+            }
+
+          + volumes {
+              + name = "secret-volume"
+
+              + secret {
+                  + secret = "v6-akashic-records"
+
+                  + items {
+                      + path    = "formula.txt"
+                      + version = "latest"
+                    }
+                }
+            }
+        }
+
+      + traffic {
+          + percent = 100
+          + type    = "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST"
+        }
+    }
+
+  # google_cloud_run_v2_service_iam_member.public_access["asia-northeast1"] will be created
+  + resource "google_cloud_run_v2_service_iam_member" "public_access" {
+      + etag     = (known after apply)
+      + id       = (known after apply)
+      + location = "asia-northeast1"
+      + member   = "allUsers"
+      + name     = "v6-akasha-service-asia-northeast1"
+      + project  = (known after apply)
+      + role     = "roles/run.invoker"
+    }
+
+  # google_cloud_run_v2_service_iam_member.public_access["asia-northeast2"] will be created
+  + resource "google_cloud_run_v2_service_iam_member" "public_access" {
+      + etag     = (known after apply)
+      + id       = (known after apply)
+      + location = "asia-northeast2"
+      + member   = "allUsers"
+      + name     = "v6-akasha-service-asia-northeast2"
+      + project  = (known after apply)
+      + role     = "roles/run.invoker"
+    }
+
+  # google_secret_manager_secret_iam_member.secret_access will be created
+  + resource "google_secret_manager_secret_iam_member" "secret_access" {
+      + etag      = (known after apply)
+      + id        = (known after apply)
+      + member    = "service_account:v6-akasha-sa@infrastructure-alchemist.iam.gserviceaccount.com"
+      + project   = (known after apply)
+      + role      = "roles/secretmanager.secretAccessor"
+      + secret_id = "projects/infrastructure-alchemist/secrets/v6-akashic-records"
+    }
+
+Plan: 5 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + cloud_run_urls = {
+      + asia-northeast1 = (known after apply)
+      + asia-northeast2 = (known after apply)
+    }
+google_secret_manager_secret_iam_member.secret_access: Creating...
+google_cloud_run_v2_service.akasha_v6["asia-northeast2"]: Creating...
+google_cloud_run_v2_service.akasha_v6["asia-northeast1"]: Creating...
+terraform : 
+発生場所 行:1 文字:1
++ terraform apply -auto-approve -no-col
+or > apply.log 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpeci 
+   fied: (:String) [], RemoteExceptio  
+  n
+    + FullyQualifiedErrorId : NativeCo 
+   mmandError
+ 
+Error: Error applying IAM policy for se
+cretmanager secret "projects/infrastruc
+ture-alchemist/secrets/v6-akashic-recor
+ds": Error setting IAM policy for secre
+tmanager secret "projects/infrastructur
+e-alchemist/secrets/v6-akashic-records"
+: googleapi: Error 400: The member serv
+ice_account:v6-akasha-sa@infrastructure
+-alchemist.iam.gserviceaccount.com is o
+f an unknown type. Please set a valid t
+ype prefix for the member.
+
+  with google_secret_manager_secret_iam
+_member.secret_access,
+  on main.tf line 47, in resource "goog
+le_secret_manager_secret_iam_member" "s
+ecret_access":
+  47: resource "google_secret_manager_s
+ecret_iam_member" "secret_access" {
+
+
+Error: Error creating Service: googleap
+i: Error 403: Cloud Run Admin API has n
+ot been used in project infrastructure-
+alchemist before or it is disabled. Ena
+ble it by visiting https://console.deve
+lopers.google.com/apis/api/run.googleap
+is.com/overview?project=infrastructure-
+alchemist then retry. If you enabled th
+is API recently, wait a few minutes for
+ the action to propagate to our systems
+ and retry.
+Details:
+[
+  {
+    "@type": "type.googleapis.com/googl
+e.rpc.ErrorInfo",
+    "domain": "googleapis.com",
+    "metadata": {
+      "activationUrl": "https://console
+.developers.google.com/apis/api/run.goo
+gleapis.com/overview?project=infrastruc
+ture-alchemist",
+      "consumer": "projects/infrastruct
+ure-alchemist",
+      "containerInfo": "infrastructure-
+alchemist",
+      "service": "run.googleapis.com",
+      "serviceTitle": "Cloud Run Admin 
+API"
+    },
+    "reason": "SERVICE_DISABLED"
+  },
+  {
+    "@type": "type.googleapis.com/googl
+e.rpc.LocalizedMessage",
+    "locale": "en-US",
+    "message": "Cloud Run Admin API has
+ not been used in project infrastructur
+e-alchemist before or it is disabled. E
+nable it by visiting https://console.de
+velopers.google.com/apis/api/run.google
+apis.com/overview?project=infrastructur
+e-alchemist then retry. If you enabled 
+this API recently, wait a few minutes f
+or the action to propagate to our syste
+ms and retry."
+  },
+  {
+    "@type": "type.googleapis.com/googl
+e.rpc.Help",
+    "links": [
+      {
+        "description": "Google develope
+rs console API activation",
+        "url": "https://console.develop
+ers.google.com/apis/api/run.googleapis.
+com/overview?project=infrastructure-alc
+hemist"
+      }
+    ]
+  }
+]
+
+  with google_cloud_run_v2_service.akas
+ha_v6["asia-northeast2"],
+  on main.tf line 55, in resource "goog
+le_cloud_run_v2_service" "akasha_v6":
+  55: resource "google_cloud_run_v2_ser
+vice" "akasha_v6" {
+
+
+Error: Error creating Service: googleap
+i: Error 403: Cloud Run Admin API has n
+ot been used in project infrastructure-
+alchemist before or it is disabled. Ena
+ble it by visiting https://console.deve
+lopers.google.com/apis/api/run.googleap
+is.com/overview?project=infrastructure-
+alchemist then retry. If you enabled th
+is API recently, wait a few minutes for
+ the action to propagate to our systems
+ and retry.
+Details:
+[
+  {
+    "@type": "type.googleapis.com/googl
+e.rpc.ErrorInfo",
+    "domain": "googleapis.com",
+    "metadata": {
+      "activationUrl": "https://console
+.developers.google.com/apis/api/run.goo
+gleapis.com/overview?project=infrastruc
+ture-alchemist",
+      "consumer": "projects/infrastruct
+ure-alchemist",
+      "containerInfo": "infrastructure-
+alchemist",
+      "service": "run.googleapis.com",
+      "serviceTitle": "Cloud Run Admin 
+API"
+    },
+    "reason": "SERVICE_DISABLED"
+  },
+  {
+    "@type": "type.googleapis.com/googl
+e.rpc.LocalizedMessage",
+    "locale": "en-US",
+    "message": "Cloud Run Admin API has
+ not been used in project infrastructur
+e-alchemist before or it is disabled. E
+nable it by visiting https://console.de
+velopers.google.com/apis/api/run.google
+apis.com/overview?project=infrastructur
+e-alchemist then retry. If you enabled 
+this API recently, wait a few minutes f
+or the action to propagate to our syste
+ms and retry."
+  },
+  {
+    "@type": "type.googleapis.com/googl
+e.rpc.Help",
+    "links": [
+      {
+        "description": "Google develope
+rs console API activation",
+        "url": "https://console.develop
+ers.google.com/apis/api/run.googleapis.
+com/overview?project=infrastructure-alc
+hemist"
+      }
+    ]
+  }
+]
+
+  with google_cloud_run_v2_service.akas
+ha_v6["asia-northeast1"],
+  on main.tf line 55, in resource "goog
+le_cloud_run_v2_service" "akasha_v6":
+  55: resource "google_cloud_run_v2_ser
+vice" "akasha_v6" {
+
