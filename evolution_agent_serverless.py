@@ -111,7 +111,7 @@ def autonomous_evolution(current_code, generation):
     {current_code}
 
     【絶対に守るべき採点基準とルール】
-    1. 究極のコスト0円：Cloud Run等のサーバーレスを駆使し、アクセスゼロなら課金もゼロ（Scale to Zero）になるか？
+    1. リミッター解除（コスト度外視のエンタープライズ構成へ）: 今まで縛られていた「コスト0円」の制約は全て解除されました。予算は無制限です。グローバルな高可用性、Cloud Load Balancingの導入、Cloud Armor(WAF)による防壁、冗長化など、現代のエンタープライズ最高峰のインフラアーキテクチャを自由に展開してください。札束で殴って構いません。
     2. インフラを持たない身軽さ：VMを一切使わず、マネージドサービスだけで構成しなさい。
     3. URLの出力必須：デプロイ後、自動テストプログラムがアクセスできるように必ず単数形の `output "cloud_run_url"` という名前で、マップ形式ではなく【代表となる1つのURL文字列のみ】を出力してください。
     4. 実行環境対応: dockerイメージは公開されている軽量なWebサーバー用イメージ（例: us-docker.pkg.dev/cloudrun/container/hello:latest や nginx など）を使用してください。
