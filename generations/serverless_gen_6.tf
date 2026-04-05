@@ -54,7 +54,7 @@ resource "google_secret_manager_secret_iam_member" "secret_access" {
 # [錬金術: 双子都市の完成形]
 # 東西の二極に、最適化されたリソースを配置。
 resource "google_cloud_run_v2_service" "chimera_v5" {
-  for_each = toset(locals.regions)
+  for_each = toset(local.regions)
   name     = "v5-chimera-service-${each.key}"
   location = each.key
   ingress  = "INGRESS_TRAFFIC_ALL"
@@ -69,7 +69,7 @@ resource "google_cloud_run_v2_service" "chimera_v5" {
     }
 
     containers {
-      image = locals.image
+      image = local.image
       resources {
         limits = {
           cpu    = "1"
@@ -99,7 +99,7 @@ resource "google_cloud_run_v2_service" "chimera_v5" {
 # [錬金術: 公開の儀]
 # 門戸を広げつつも、内部の魂（Secret）は執事が守護する。
 resource "google_cloud_run_v2_service_iam_member" "public_access" {
-  for_each = toset(locals.regions)
+  for_each = toset(local.regions)
   location = google_cloud_run_v2_service.chimera_v5[each.key].location
   name     = google_cloud_run_v2_service.chimera_v5[each.key].name
   role     = "roles/run.invoker"
@@ -110,7 +110,7 @@ resource "google_cloud_run_v2_service_iam_member" "public_access" {
 # 錬成された二つの聖域（URL）を即座に報告する。
 output "service_urls" {
   description = "The URLs of the Twin Alchemical Sanctuaries"
-  value       = { for r in locals.regions : r => google_cloud_run_v2_service.chimera_v5[r].uri }
+  value       = { for r in local.regions : r => google_cloud_run_v2_service.chimera_v5[r].uri }
 }
 
 # -------------------------------------------------------------------
