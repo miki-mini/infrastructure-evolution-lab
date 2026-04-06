@@ -87,7 +87,14 @@ def deploy_test_and_destroy(code):
                 score = 20
 
     finally:
-        print("  💣 [Phase 4/4] お片付け: Terraform Destroy (課金防止のため必ず実行)...")
+        if is_success:
+            print(f"\n  =======================================================")
+            print(f"  👀 【一時停止】ブラウザで最強のインフラを確認してください！")
+            print(f"  👉 URL: {url}")
+            print(f"  =======================================================")
+            input("  確認が終わったら、ターミナルで Enterキー を押してください。お片付けを開始します... ")
+
+        print("\n  💣 [Phase 4/4] お片付け: Terraform Destroy (課金防止のため必ず実行)...")
         destroy_res = run_cmd(["terraform", "destroy", "-auto-approve"])
         if destroy_res.returncode != 0:
             print(f"  ⚠️ Destroyの一部に失敗しました。手動でGCPを確認してください。\n{destroy_res.stderr[:300]}")
